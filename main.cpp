@@ -19,16 +19,8 @@ int compare_extra_words(const vector<char> &temp) {
 	const vector<char> words_conj = {'c', 'o', 'n', 'j', '.'};
 	const vector<char> words_prep = {'p', 'r', 'e', 'p', '.'};
 	const vector<char> words_int = {'i', 'n', 't', '.'};
-	if (temp == words_n ||
-	    temp == words_pron ||
-	    temp == words_art ||
-	    temp == words_num ||
-	    temp == words_adj ||
-	    temp == words_adv ||
-	    temp == words_v ||
-	    temp == words_conj ||
-	    temp == words_prep ||
-	    temp == words_int) {
+	if (temp == words_n || temp == words_pron || temp == words_art || temp == words_num || temp == words_adj ||
+	    temp == words_adv || temp == words_v || temp == words_conj || temp == words_prep || temp == words_int) {
 		return 1;
 	} else {
 		return 0;
@@ -42,6 +34,7 @@ int main() {
 	cout << "https://github.com/BlazeSnow/Delete-characters-except-English" << endl << endl;
 	cout << "当前程序版本号：v1.1.0" << endl;
 	vector<char> characters;
+	vector<char> answer;
 	int choose;
 	cout << "需要生成全新txt文件(0)还是处理现有txt文件(1)：" << endl;
 	cin >> choose;
@@ -58,22 +51,13 @@ int main() {
 	} else if (choose == 1) {
 		fstream file("Delete-characters-except-English.txt", ios::in);
 		if (file.is_open()) {
-			vector<char> tempwords;
+			//输入文件内容
 			while (true) {
 				char temp;
 				file >> noskipws >> temp;
-				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z')
-				    || temp == '.' || temp == ' ' || temp == ',') {
-					tempwords.push_back(temp);
-					if (compare_extra_words(tempwords) == 1) {
-						tempwords.clear();
-					}
-				} else if (temp == '\n') {
-					for (auto i: tempwords) {
-						characters.push_back(i);
-					}
-					tempwords.clear();
-					characters.push_back('\n');
+				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z') || temp == '.' || temp == ' ' ||
+				    temp == ',' || temp == '\n' || temp == '(' || temp == ')') {
+					characters.push_back(temp);
 				}
 				if (file.eof()) {
 					break;
@@ -81,8 +65,21 @@ int main() {
 			}
 			file.close();
 			cout << "文件读取完毕" << endl;
-			fstream file1("ANSWER-Delete-characters-except-English.txt", ios::out);
+			vector<char> tempWords;
 			for (auto i: characters) {
+				if (i == ' ' || i == '\n' || i == ',' || i == '(' || i == ')') {
+					for (auto j: tempWords) {
+						answer.push_back(j);
+					}
+					answer.push_back(i);
+					tempWords.clear();
+				} else {
+					tempWords.push_back(i);
+				}
+			}
+			//写入新文件
+			fstream file1("ANSWER-Delete-characters-except-English.txt", ios::out);
+			for (auto i: answer) {
 				file1 << i;
 			}
 			cout << "处理后内容已写入\"ANSWER-Delete-characters-except-English.txt\"文件" << endl;
