@@ -47,6 +47,7 @@ int main() {
 			system("pause");
 		} else {
 			cout << "ERROR:生成文件失败" << endl;
+			system("pause");
 		}
 	} else if (choose == 1) {
 		fstream file("Delete-characters-except-English.txt", ios::in);
