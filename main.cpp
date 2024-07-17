@@ -56,7 +56,7 @@ int main() {
 				char temp;
 				file >> noskipws >> temp;
 				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z') || temp == '.' || temp == ' ' ||
-				    temp == ',' || temp == '\n' || temp == '(' || temp == ')') {
+				    temp == '\n' || temp == '(' || temp == ')') {
 					characters.push_back(temp);
 				}
 				if (file.eof()) {
@@ -67,12 +67,22 @@ int main() {
 			cout << "文件读取完毕" << endl;
 			vector<char> tempWords;
 			for (auto i: characters) {
-				if (i == ' ' || i == '\n' || i == ',' || i == '(' || i == ')') {
+				if (i == ' ' || i == '\n') {
 					for (auto j: tempWords) {
 						answer.push_back(j);
 					}
 					answer.push_back(i);
 					tempWords.clear();
+				} else if (i == ')') {
+					if (tempWords.front() == '(') {
+						tempWords.clear();
+					} else {
+						for (auto j: tempWords) {
+							answer.push_back(j);
+						}
+						answer.push_back(i);
+						tempWords.clear();
+					}
 				} else {
 					tempWords.push_back(i);
 				}
