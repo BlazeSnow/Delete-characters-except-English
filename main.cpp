@@ -72,16 +72,16 @@ int main() {
 				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z') ||
 				    temp == '\n' || temp == '.') {
 					tempwords.push(temp);
-				} else if (temp == ' ' || temp == ',') {
-					if (compare_extra_words(tempwords) == 0) {
-						while (!tempwords.empty()) {
-							char temp1;
-							temp1 = tempwords.front();
-							tempwords.pop();
-							characters.push_back(temp1);
-						}
-					} else {
+					if (compare_extra_words(tempwords) == 1) {
 						tempwords = queue<char>();
+					}
+				} else if (temp == ' ' || temp == ',') {
+					while (!tempwords.empty()) {
+						char temp1;
+						temp1 = tempwords.front();
+						tempwords.pop();
+						characters.push_back(temp1);
+
 					}
 				}
 				if (file.eof()) {
