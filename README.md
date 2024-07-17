@@ -1,2 +1,8 @@
-# Delete-characters-except-English
+# 写在最前
+
 删去字符，除了英文
+
+# 更新日志
+
+## v1.0.0
+
