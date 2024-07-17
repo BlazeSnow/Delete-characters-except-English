@@ -13,7 +13,7 @@ int main() {
 	cout << "Copyright (C) 2024 BlazeSnow.保留所有权利。" << endl;
 	cout << "本程序以GNU General Public License v3.0的条款发布。" << endl;
 	cout << "https://github.com/BlazeSnow/Delete-characters-except-English" << endl << endl;
-	cout << "当前程序版本号：v1.0.0" << endl;
+	cout << "当前程序版本号：v1.0.1" << endl;
 	vector<char> characters;
 	vector<char> answer;
 	int choose;
@@ -30,7 +30,7 @@ int main() {
 		if (file.is_open()) {
 			while (true) {
 				char temp;
-				file >> temp;
+				file >> noskipws >> temp;
 				characters.push_back(temp);
 				if (file.eof()) {
 					break;
