@@ -5,17 +5,10 @@
 #include <fstream>
 #include <filesystem>
 #include <vector>
-#include <queue>
 
 using namespace std;
 
-int compare_extra_words(queue<char> temp) {
-	vector<char> temp1;
-	for (auto i = temp.front(); i != temp.back(); i++) {
-		char t = temp.front();
-		temp.pop();
-		temp1.push_back(t);
-	}
+int compare_extra_words(const vector<char> &temp) {
 	const vector<char> words_n = {'n', '.'};
 	const vector<char> words_pron = {'p', 'r', 'o', 'n', '.'};
 	const vector<char> words_art = {'a', 'r', 't', '.'};
@@ -26,16 +19,16 @@ int compare_extra_words(queue<char> temp) {
 	const vector<char> words_conj = {'c', 'o', 'n', 'j', '.'};
 	const vector<char> words_prep = {'p', 'r', 'e', 'p', '.'};
 	const vector<char> words_int = {'i', 'n', 't', '.'};
-	if (temp1 == words_n ||
-	    temp1 == words_pron ||
-	    temp1 == words_art ||
-	    temp1 == words_num ||
-	    temp1 == words_adj ||
-	    temp1 == words_adv ||
-	    temp1 == words_v ||
-	    temp1 == words_conj ||
-	    temp1 == words_prep ||
-	    temp1 == words_int) {
+	if (temp == words_n ||
+	    temp == words_pron ||
+	    temp == words_art ||
+	    temp == words_num ||
+	    temp == words_adj ||
+	    temp == words_adv ||
+	    temp == words_v ||
+	    temp == words_conj ||
+	    temp == words_prep ||
+	    temp == words_int) {
 		return 1;
 	} else {
 		return 0;
@@ -65,24 +58,22 @@ int main() {
 	} else if (choose == 1) {
 		fstream file("Delete-characters-except-English.txt", ios::in);
 		if (file.is_open()) {
-			queue<char> tempwords;
+			vector<char> tempwords;
 			while (true) {
 				char temp;
 				file >> noskipws >> temp;
-				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z') ||
-				    temp == '\n' || temp == '.') {
-					tempwords.push(temp);
+				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z')
+				    || temp == '.' || temp == ' ' || temp == ',') {
+					tempwords.push_back(temp);
 					if (compare_extra_words(tempwords) == 1) {
-						tempwords = queue<char>();
+						tempwords.clear();
 					}
-				} else if (temp == ' ' || temp == ',') {
-					while (!tempwords.empty()) {
-						char temp1;
-						temp1 = tempwords.front();
-						tempwords.pop();
-						characters.push_back(temp1);
-
+				} else if (temp == '\n') {
+					for (auto i: tempwords) {
+						characters.push_back(i);
 					}
+					tempwords.clear();
+					characters.push_back('\n');
 				}
 				if (file.eof()) {
 					break;
