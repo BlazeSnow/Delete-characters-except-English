@@ -8,23 +8,29 @@
 
 using namespace std;
 
+const vector<vector<char>> words_delete = {
+		//英语常用带.字符
+		{'n', '.'},
+		{'p', 'r', 'o', 'n', '.'},
+		{'a', 'r', 't', '.'},
+		{'n', 'u', 'm', '.'},
+		{'a', 'd', 'j', '.'},
+		{'a', 'd', 'v', '.'},
+		{'v', '.'},
+		{'c', 'o', 'n', 'j', '.'},
+		{'p', 'r', 'e', 'p', '.'},
+		{'i', 'n', 't', '.'},
+		//自定义
+		{'a', 'b', 'b', 'r'},
+};
+
 int compare_extra_words(const vector<char> &temp) {
-	const vector<char> words_n = {'n', '.'};
-	const vector<char> words_pron = {'p', 'r', 'o', 'n', '.'};
-	const vector<char> words_art = {'a', 'r', 't', '.'};
-	const vector<char> words_num = {'n', 'u', 'm', '.'};
-	const vector<char> words_adj = {'a', 'd', 'j', '.'};
-	const vector<char> words_adv = {'a', 'd', 'v', '.'};
-	const vector<char> words_v = {'v', '.'};
-	const vector<char> words_conj = {'c', 'o', 'n', 'j', '.'};
-	const vector<char> words_prep = {'p', 'r', 'e', 'p', '.'};
-	const vector<char> words_int = {'i', 'n', 't', '.'};
-	if (temp == words_n || temp == words_pron || temp == words_art || temp == words_num || temp == words_adj ||
-	    temp == words_adv || temp == words_v || temp == words_conj || temp == words_prep || temp == words_int) {
-		return 1;
-	} else {
-		return 0;
+	for (const auto &i: words_delete) {
+		if (i == temp) {
+			return 1;
+		}
 	}
+	return 0;
 }
 
 int main() {
@@ -34,6 +40,7 @@ int main() {
 	cout << "https://github.com/BlazeSnow/Delete-characters-except-English" << endl << endl;
 	cout << "当前程序版本号：v1.1.0" << endl;
 	vector<char> characters;
+	vector<vector<char>> words;
 	vector<char> answer;
 	int choose;
 	cout << "需要生成全新txt文件(0)还是处理现有txt文件(1)：" << endl;
