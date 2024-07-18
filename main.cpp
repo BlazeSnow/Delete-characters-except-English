@@ -9,7 +9,7 @@
 using namespace std;
 
 const vector<vector<char>> words_delete = {
-		//英语常用带.字符
+		//英语单词类型常用缩写
 		{'n', '.'},
 		{'p', 'r', 'o', 'n', '.'},
 		{'a', 'r', 't', '.'},
@@ -21,7 +21,9 @@ const vector<vector<char>> words_delete = {
 		{'p', 'r', 'e', 'p', '.'},
 		{'i', 'n', 't', '.'},
 		//自定义
-		{'a', 'b', 'b', 'r'},
+		{'a', 'b', 'b', 'r', '.'},
+		{'v', 't', '.'},
+		{'v', 'i', '.'},
 };
 
 int compare_extra_words(const vector<char> &temp) {
@@ -38,7 +40,7 @@ int main() {
 	cout << "Copyright (C) 2024 BlazeSnow.保留所有权利。" << endl;
 	cout << "本程序以GNU General Public License v3.0的条款发布。" << endl;
 	cout << "https://github.com/BlazeSnow/Delete-characters-except-English" << endl << endl;
-	cout << "当前程序版本号：v1.1.0" << endl;
+	cout << "当前程序版本号：v1.2.0" << endl;
 	vector<char> characters;
 	vector<vector<char>> words;
 	vector<char> answer;
@@ -64,8 +66,10 @@ int main() {
 				char temp;
 				file >> noskipws >> temp;
 				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z') || temp == '.' || temp == ' ' ||
-				    temp == '\n' || temp == '(' || temp == ')') {
+				    temp == '\n') {
 					characters.push_back(temp);
+				} else {
+					characters.push_back(' ');
 				}
 				if (file.eof()) {
 					break;
@@ -75,24 +79,27 @@ int main() {
 			cout << "文件读取完毕" << endl;
 			vector<char> tempWords;
 			for (auto i: characters) {
-				if (i == ' ' || i == '\n') {
-					for (auto j: tempWords) {
-						answer.push_back(j);
-					}
-					answer.push_back(i);
+				if (i == ' ' || i == '\n' || i == '.') {
+					//插入符号
+					tempWords.push_back(i);
+					//推送字符
+					words.push_back(tempWords);
+					//清除暂用字符串
 					tempWords.clear();
-				} else if (i == ')') {
-					if (tempWords.front() == '(') {
-						tempWords.clear();
-					} else {
-						for (auto j: tempWords) {
-							answer.push_back(j);
-						}
-						answer.push_back(i);
-						tempWords.clear();
-					}
 				} else {
 					tempWords.push_back(i);
+				}
+			}
+			//删除特殊词
+			for (auto &i: words) {
+				if (compare_extra_words(i) == 1) {
+					i.clear();
+				}
+			}
+			//写入answer
+			for (const auto &i: words) {
+				for (auto j: i) {
+					answer.push_back(j);
 				}
 			}
 			//写入新文件
