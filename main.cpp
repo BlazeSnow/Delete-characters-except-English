@@ -24,9 +24,6 @@ const vector<vector<char>> words_delete = {
 		{'a', 'b', 'b', 'r', '.'},
 		{'v', 't', '.'},
 		{'v', 'i', '.'},
-		//删除省略号
-		{'.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.'},
 };
 
 static vector<char> characters;
@@ -50,7 +47,7 @@ void compare_extra_words() {
 	}
 }
 
-void compare_delete_parenthesis() {
+void delete_parenthesis() {
 	for (auto i = characters.begin(); i != characters.end(); i++) {
 		if (*i == '(') {
 			for (auto it = i; it != characters.end(); it++) {
@@ -59,6 +56,26 @@ void compare_delete_parenthesis() {
 					break;
 				}
 			}
+		}
+	}
+}
+
+void delete_blank() {
+	for (auto i = characters.begin(); i != characters.end();) {
+		if (*i == ' ' && *(i + 1) == ' ') {
+			characters.erase(i);
+		} else {
+			i++;
+		}
+	}
+}
+
+void delete_dot() {
+	for (auto i = characters.begin(); i != characters.end();) {
+		if (*i == '.') {
+			characters.erase(i);
+		} else {
+			i++;
 		}
 	}
 }
@@ -106,7 +123,9 @@ int main() {
 			cout << "文件读取完毕" << endl;
 			//删除特殊词
 			compare_extra_words();
-			compare_delete_parenthesis();
+			delete_parenthesis();
+			delete_dot();
+			delete_blank();
 			//写入answer
 			for (const auto &i: characters) {
 				answer.push_back(i);
