@@ -5,12 +5,21 @@
 3. 程序将删除英文括号及括号内内容
 4. 程序将删除表示单词类型的缩写
 
-|   各   |   种   |   缩   |   写   |
-|:-----:|:-----:|:-----:|:-----:|
-|  n.   | pron. | art.  | num.  |
-| adj.  | adv.  |  v.   | conj. |
-| prep. | int.  | abbr. |  vt.  |
-|  vi.  |       |       |       |
+|       Full        | Short |
+|:-----------------:|:-----:|
+|       Noun        |  n.   |
+|      Pronoun      | pron. |
+|      Article      | art.  |
+|      Numeral      | num.  |
+|     Adjective     | adj.  |
+|      Adverb       | adv.  |
+|       Verb        |  v.   |
+|    Conjunction    | conj. |
+|    Preposition    | prep. |
+|   Interjection    | int.  |
+|   Abbreviation    | abbr. |
+|  Transitive Verb  |  vt.  |
+| Intransitive Verb |  vi.  |
 
 # 更新日志
 
