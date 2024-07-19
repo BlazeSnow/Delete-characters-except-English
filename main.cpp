@@ -20,10 +20,23 @@ const vector<vector<char>> words_delete = {
 		{'c', 'o', 'n', 'j', '.'},
 		{'p', 'r', 'e', 'p', '.'},
 		{'i', 'n', 't', '.'},
-		//自定义
 		{'a', 'b', 'b', 'r', '.'},
 		{'v', 't', '.'},
 		{'v', 'i', '.'},
+		{'d', 'e', 't', '.'},
+		{'q', 'u', 'a', 'n', 't', '.'},
+		{'a', 'u', 'x', '.'},
+		{'m', 'o', 'd', 'a', 'l', '.'},
+		{'g', 'e', 'r', '.'},
+		{'i', 'n', 'f', '.'},
+		{'p', 'a', 'r', 't', '.'},
+		{'r', 'e', 'f', 'l', '.'},
+		{'d', 'e', 'm', '.'},
+		{'p', 'o', 's', 's', '.'},
+		{'r', 'e', 'l', '.'},
+		{'c', 'o', 'l', 'l', '.'},
+		{'a', 'b', 's', '.'},
+		{'c', 'o', 'n', 'c', '.'},
 };
 
 static vector<char> characters;
@@ -106,7 +119,7 @@ int main() {
 	system("chcp 65001");
 	cout << "Copyright (C) 2024 BlazeSnow.保留所有权利。" << endl;
 	cout << "本程序以GNU General Public License v3.0的条款发布。" << endl;
-	cout << "当前程序版本号：v1.3.2" << endl;
+	cout << "当前程序版本号：v1.3.3" << endl;
 	cout << "https://github.com/BlazeSnow/Delete-characters-except-English" << endl << endl;
 	vector<char> answer;
 	int choose;
