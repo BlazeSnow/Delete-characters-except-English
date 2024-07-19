@@ -29,21 +29,20 @@ const vector<vector<char>> words_delete = {
 static vector<char> characters;
 
 void compare_extra_words() {
-	for (auto i = characters.front(); i != characters.back();) {
+	for (auto i = characters.begin(); i != characters.end(); i++) {
 		int count = 0;
 		for (const auto &words: words_delete) {
+			auto it = i;
 			for (auto j: words) {
-				if (j == i) {
-					count++;
-					i++;
+				if (*it == j) {
+					++it;
+					++count;
 				}
 			}
 			if (count == words.size()) {
-				while (count != 0) {
-					characters.reserve(i - count);
-					count--;
-				}
+				characters.erase(i, it);
 			}
+			count = 0;
 		}
 	}
 }
@@ -81,7 +80,7 @@ int main() {
 				char temp;
 				file >> noskipws >> temp;
 				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z') || temp == '.'
-				    || temp == ' ' || temp == '\n') {
+				    || temp == ' ' || temp == '\n' || temp == '(' || temp == ')') {
 					//正常收集
 					characters.push_back(temp);
 				} else {
@@ -94,7 +93,7 @@ int main() {
 			file.close();
 			cout << "文件读取完毕" << endl;
 			//删除特殊词
-
+			compare_extra_words();
 			//写入answer
 			for (const auto &i: characters) {
 				answer.push_back(i);
