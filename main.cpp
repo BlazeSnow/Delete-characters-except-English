@@ -106,7 +106,7 @@ int main() {
 	system("chcp 65001");
 	cout << "Copyright (C) 2024 BlazeSnow.保留所有权利。" << endl;
 	cout << "本程序以GNU General Public License v3.0的条款发布。" << endl;
-	cout << "当前程序版本号：v1.3.1" << endl;
+	cout << "当前程序版本号：v1.3.2" << endl;
 	cout << "https://github.com/BlazeSnow/Delete-characters-except-English" << endl << endl;
 	vector<char> answer;
 	int choose;
@@ -155,12 +155,18 @@ int main() {
 			}
 			//写入新文件
 			fstream file1("ANSWER-Delete-characters-except-English.txt", ios::out);
-			for (auto i: answer) {
-				file1 << i;
+			if (file1.is_open()) {
+				for (auto i: answer) {
+					file1 << i;
+				}
+				cout << "处理后内容已写入\"ANSWER-Delete-characters-except-English.txt\"文件" << endl;
+				cout << "路径为：" << filesystem::current_path() << endl;
+				file1.close();
+				system("pause");
+			} else {
+				cout << "ERROR:创建\"ANSWER-Delete-characters-except-English.txt\"文件失败" << endl;
+				system("pause");
 			}
-			cout << "处理后内容已写入\"ANSWER-Delete-characters-except-English.txt\"文件" << endl;
-			cout << "路径为：" << filesystem::current_path() << endl;
-			system("pause");
 		} else {
 			cout << "ERROR:读取文件失败" << endl;
 			system("pause");
