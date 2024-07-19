@@ -35,13 +35,19 @@ int compare_extra_words(const vector<char> &temp) {
 	return 0;
 }
 
+int compare_delete_parenthesis(const vector<char> &temp) {
+	if (temp.front() == '(' && temp.back() == ')') {
+		return 1;
+	}
+	return 0;
+}
+
 int main() {
 	system("chcp 65001");
 	cout << "Copyright (C) 2024 BlazeSnow.保留所有权利。" << endl;
 	cout << "本程序以GNU General Public License v3.0的条款发布。" << endl;
 	cout << "当前程序版本号：v1.3.0" << endl;
 	cout << "https://github.com/BlazeSnow/Delete-characters-except-English" << endl << endl;
-	vector<char> characters;
 	vector<vector<char>> words;
 	vector<char> answer;
 	int choose;
@@ -62,14 +68,41 @@ int main() {
 		fstream file("Delete-characters-except-English.txt", ios::in);
 		if (file.is_open()) {
 			//输入文件内容
+			vector<char> temp_words;
+			bool jump = false;
 			while (true) {
 				char temp;
 				file >> noskipws >> temp;
-				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z') || temp == '.' || temp == ' ' ||
-				    temp == '\n') {
-					characters.push_back(temp);
+				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z') || temp == '.') {
+					//正常收集
+					temp_words.push_back(temp);
+				} else if (!jump) {
+					//不在跳过状态（收集括号状态）
+					if (temp == '(') {
+						//遇到前括号，断句
+						words.push_back(temp_words);
+						temp_words.clear();
+						temp_words.push_back('(');
+						jump = true;
+					} else if (temp == ' ' || temp == '\n') {
+						//遇到空格和回车，断句
+						temp_words.push_back(temp);
+						words.push_back(temp_words);
+						temp_words.clear();
+					} else {
+						temp_words.push_back(' ');
+					}
 				} else {
-					characters.push_back(' ');
+					//在跳过状态（收集括号状态）
+					if (temp == ')') {
+						//遇到后括号，断句
+						temp_words.push_back(')');
+						words.push_back(temp_words);
+						temp_words.clear();
+						jump = false;
+					} else {
+						temp_words.push_back(' ');
+					}
 				}
 				if (file.eof()) {
 					break;
@@ -77,22 +110,9 @@ int main() {
 			}
 			file.close();
 			cout << "文件读取完毕" << endl;
-			vector<char> tempWords;
-			for (auto i: characters) {
-				if (i == ' ' || i == '\n' || i == '.') {
-					//插入符号
-					tempWords.push_back(i);
-					//推送字符
-					words.push_back(tempWords);
-					//清除暂用字符串
-					tempWords.clear();
-				} else {
-					tempWords.push_back(i);
-				}
-			}
 			//删除特殊词
 			for (auto &i: words) {
-				if (compare_extra_words(i) == 1) {
+				if (compare_extra_words(i) == 1 || compare_delete_parenthesis(i) == 1) {
 					i.clear();
 				}
 			}
