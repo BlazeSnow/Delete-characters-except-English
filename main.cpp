@@ -164,7 +164,7 @@ int main() {
 				file1.close();
 				system("pause");
 			} else {
-				cout << "ERROR:创建\"ANSWER-Delete-characters-except-English.txt\"文件失败" << endl;
+				cout << "ERROR:创建输出文件失败" << endl;
 				system("pause");
 			}
 		} else {
