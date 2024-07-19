@@ -28,6 +28,7 @@ const vector<vector<char>> words_delete = {
 
 static vector<char> characters;
 
+//删除特殊词
 void compare_extra_words() {
 	for (auto i = characters.begin(); i != characters.end(); i++) {
 		int count = 0;
@@ -47,6 +48,7 @@ void compare_extra_words() {
 	}
 }
 
+//删除括号及其内容
 void delete_parenthesis() {
 	for (auto i = characters.begin(); i != characters.end(); i++) {
 		if (*i == '(') {
@@ -60,6 +62,7 @@ void delete_parenthesis() {
 	}
 }
 
+//删除double空格
 void delete_blank() {
 	for (auto i = characters.begin(); i != characters.end();) {
 		if (*i == ' ' && *(i + 1) == ' ') {
@@ -70,9 +73,28 @@ void delete_blank() {
 	}
 }
 
+//删除.
 void delete_dot() {
 	for (auto i = characters.begin(); i != characters.end();) {
 		if (*i == '.') {
+			characters.erase(i);
+		} else {
+			i++;
+		}
+	}
+}
+
+//删除空格+回车＆回车+回车
+void delete_blank_n() {
+	for (auto i = characters.begin(); i != characters.end();) {
+		if (*i == ' ' && *(i + 1) == '\n') {
+			characters.erase(i, i + 1);
+		} else {
+			i++;
+		}
+	}
+	for (auto i = characters.begin(); i != characters.end();) {
+		if (*i == '\n' && *(i + 1) == '\n') {
 			characters.erase(i);
 		} else {
 			i++;
@@ -126,6 +148,7 @@ int main() {
 			delete_parenthesis();
 			delete_dot();
 			delete_blank();
+			delete_blank_n();
 			//写入answer
 			for (const auto &i: characters) {
 				answer.push_back(i);
