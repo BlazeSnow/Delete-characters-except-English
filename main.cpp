@@ -26,23 +26,66 @@ const vector<vector<char>> words_delete = {
 		{'v', 'i', '.'},
 };
 
-int compare_extra_words(const vector<char> &temp) {
-	for (const auto &i: words_delete) {
-		if (i == temp) {
-			return 1;
+static vector<char> characters;
+
+void compare_extra_words() {
+	for (auto i = characters.begin(); i != characters.end(); i++) {
+		int count = 0;
+		for (const auto &words: words_delete) {
+			auto it = i;
+			for (auto j: words) {
+				if (*it == j) {
+					++it;
+					++count;
+				}
+			}
+			if (count == words.size()) {
+				characters.erase(i, it);
+			}
+			count = 0;
 		}
 	}
-	return 0;
+}
+
+void delete_parenthesis() {
+	for (auto i = characters.begin(); i != characters.end(); i++) {
+		if (*i == '(') {
+			for (auto it = i; it != characters.end(); it++) {
+				if (*it == ')') {
+					characters.erase(i, it + 1);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void delete_blank() {
+	for (auto i = characters.begin(); i != characters.end();) {
+		if (*i == ' ' && *(i + 1) == ' ') {
+			characters.erase(i);
+		} else {
+			i++;
+		}
+	}
+}
+
+void delete_dot() {
+	for (auto i = characters.begin(); i != characters.end();) {
+		if (*i == '.') {
+			characters.erase(i);
+		} else {
+			i++;
+		}
+	}
 }
 
 int main() {
 	system("chcp 65001");
 	cout << "Copyright (C) 2024 BlazeSnow.保留所有权利。" << endl;
 	cout << "本程序以GNU General Public License v3.0的条款发布。" << endl;
-	cout << "当前程序版本号：v1.2.0" << endl;
+	cout << "当前程序版本号：v1.3.0" << endl;
 	cout << "https://github.com/BlazeSnow/Delete-characters-except-English" << endl << endl;
-	vector<char> characters;
-	vector<vector<char>> words;
 	vector<char> answer;
 	int choose;
 	cout << "需要生成全新txt文件(0)还是处理现有txt文件(1)：" << endl;
@@ -65,8 +108,9 @@ int main() {
 			while (true) {
 				char temp;
 				file >> noskipws >> temp;
-				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z') || temp == '.' || temp == ' ' ||
-				    temp == '\n') {
+				if (('a' <= temp && temp <= 'z') || ('A' <= temp && temp <= 'Z') || temp == '.'
+				    || temp == ' ' || temp == '\n' || temp == '(' || temp == ')') {
+					//正常收集
 					characters.push_back(temp);
 				} else {
 					characters.push_back(' ');
@@ -77,30 +121,14 @@ int main() {
 			}
 			file.close();
 			cout << "文件读取完毕" << endl;
-			vector<char> tempWords;
-			for (auto i: characters) {
-				if (i == ' ' || i == '\n' || i == '.') {
-					//插入符号
-					tempWords.push_back(i);
-					//推送字符
-					words.push_back(tempWords);
-					//清除暂用字符串
-					tempWords.clear();
-				} else {
-					tempWords.push_back(i);
-				}
-			}
 			//删除特殊词
-			for (auto &i: words) {
-				if (compare_extra_words(i) == 1) {
-					i.clear();
-				}
-			}
+			compare_extra_words();
+			delete_parenthesis();
+			delete_dot();
+			delete_blank();
 			//写入answer
-			for (const auto &i: words) {
-				for (auto j: i) {
-					answer.push_back(j);
-				}
+			for (const auto &i: characters) {
+				answer.push_back(i);
 			}
 			//写入新文件
 			fstream file1("ANSWER-Delete-characters-except-English.txt", ios::out);
