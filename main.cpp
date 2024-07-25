@@ -161,7 +161,7 @@ int main()
 	system("chcp 65001");
 	cout << "Copyright (C) 2024 BlazeSnow.保留所有权利。" << endl;
 	cout << "本程序以GNU General Public License v3.0的条款发布。" << endl;
-	cout << "当前程序版本号：v1.3.4" << endl;
+	cout << "当前程序版本号：v1.3.5" << endl;
 	cout << "https://github.com/BlazeSnow/Delete-characters-except-English" << endl
 		 << endl;
 	vector<char> answer;
