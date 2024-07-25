@@ -121,6 +121,7 @@ void delete_dot()
 // 删除空格+回车＆回车+回车＆回车+空格
 void delete_blank_n()
 {
+	// （空格+回车）
 	for (auto i = characters.begin(); i != characters.end();)
 	{
 		if (*i == ' ' && *(i + 1) == '\n')
@@ -132,6 +133,7 @@ void delete_blank_n()
 			i++;
 		}
 	}
+	// （回车）+回车
 	for (auto i = characters.begin(); i != characters.end();)
 	{
 		if (*i == '\n' && *(i + 1) == '\n')
@@ -143,6 +145,7 @@ void delete_blank_n()
 			i++;
 		}
 	}
+	// 回车+（空格）
 	for (auto i = characters.begin(); i != characters.end();)
 	{
 		if (*i == '\n' && *(i + 1) == ' ')
