@@ -1,0 +1,41 @@
+name: CMake CI Windows
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install CMake
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $cmake_version = '3.30.3'
+          $cmake_url = "https://github.com/Kitware/CMake/releases/download/v$cmake_version/cmake-$cmake_version-windows-x86_64.zip"
+          $cmake_zip = "cmake-$cmake_version-windows-x86_64.zip"
+          $cmake_install_dir = "C:\CMake"
+
+          Invoke-WebRequest -Uri $cmake_url -OutFile $cmake_zip
+          Expand-Archive $cmake_zip -DestinationPath $cmake_install_dir
+          [System.Environment]::SetEnvironmentVariable('Path', "$env:Path;$cmake_install_dir\cmake-$cmake_version-windows-x86_64\bin", [System.EnvironmentVariableTarget]::Machine)
+
+      - name: Configure and Build
+        run: |
+          mkdir build
+          cd build
+          cmake -G "Visual Studio 17 2022" ..
+          cmake --build . --config Release
+
+      - name: Run tests
+        run: |
+          cd build
+          ctest --verbose
