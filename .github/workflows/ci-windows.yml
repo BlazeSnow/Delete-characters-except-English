@@ -14,7 +14,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取所有历史记录（可选）
+          persist-credentials: true  # 默认值，持久化身份验证令牌
 
       - name: Install CMake
         run: |
