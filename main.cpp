@@ -47,7 +47,7 @@ void compare_extra_words()
 	for (auto i = characters.begin(); i != characters.end(); i++)
 	{
 		int count = 0;
-		for (const auto &words : words_delete)
+		for (const auto& words : words_delete)
 		{
 			auto it = i;
 			for (auto j : words)
@@ -166,7 +166,7 @@ int main()
 	cout << "本程序以GNU General Public License v3.0的条款发布。" << endl;
 	cout << "当前程序版本号：v1.3.6" << endl;
 	cout << "https://github.com/BlazeSnow/Delete-characters-except-English" << endl
-		 << endl;
+		<< endl;
 	vector<char> answer;
 	int choose;
 	cout << "需要生成全新txt文件(0)还是处理现有txt文件(1)：" << endl;
@@ -220,7 +220,7 @@ int main()
 			delete_blank();
 			delete_blank_n();
 			// 写入answer
-			for (const auto &i : characters)
+			for (const auto& i : characters)
 			{
 				answer.push_back(i);
 			}
