@@ -1,0 +1,1 @@
+clang++.exe -std=c++20 main.cpp -o Delete-characters-except-English.exe
