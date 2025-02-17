@@ -1,4 +1,4 @@
-# Delete-characters-except-English
+# 背单词删中文
 
 1. 本程序将含有英文单词与中文解释的txt文件转化为仅含英文单词的txt文件
 2. 第一次使用请生成新文件"Delete-characters-except-English.txt"，将需处理内容复制进文件后处理
