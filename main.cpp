@@ -5,6 +5,9 @@
 
 using namespace std;
 
+const filesystem::path CurrentPath = filesystem::current_path();
+const string CurrentPathString = CurrentPath.string();
+
 const vector<vector<char> > words_delete = {
     // 英语单词类型常用缩写
     {'n', '.'},
@@ -125,24 +128,23 @@ void delete_blank_n() {
 int main() {
     system("chcp 65001");
     system("cls");
-    cout << "Copyright (C) 2024-2025 BlazeSnow. 保留所有权利。" << endl;
-    cout << "当前程序版本号：v1.3.8" << endl;
-    cout << "https://github.com/BlazeSnow/Delete-characters-except-English"
-            << endl
-            << endl;
+    printf("Copyright (C) 2024-2025 BlazeSnow. 保留所有权利。\n");
+    printf("当前程序版本号：v1.3.8\n");
+    printf("https://github.com/BlazeSnow/Delete-characters-except-English\n\n");
     vector<char> answer;
     int choose;
-    cout << "需要生成全新txt文件(0)还是处理现有txt文件(1)：" << endl;
+    printf("需要生成全新txt文件(0)还是处理现有txt文件(1)：\n");
     cin >> choose;
     if (choose == 0) {
         fstream file("DCEE.txt", ios::out);
         if (file.is_open()) {
             file.close();
-            cout << "已生成全新\"DCEE.txt\"文件" << endl;
-            cout << "路径为：" << filesystem::current_path() << endl;
+            printf("已生成全新\"DCEE.txt\"文件\n");
+            printf("目录为：%s\n", CurrentPathString.c_str());
             system("pause");
         } else {
-            cerr << "ERROR:生成文件失败" << endl;
+            fprintf(stderr, "错误：\"DCEE.txt\"文件生成失败，请重试\n");
+            fprintf(stderr, "目录为：%s\n", CurrentPathString.c_str());
             system("pause");
         }
     } else if (choose == 1) {
@@ -165,7 +167,7 @@ int main() {
                 }
             }
             file.close();
-            cout << "文件读取完毕" << endl;
+            printf("文件读取完毕\n");
             // 删除特殊词
             compare_extra_words();
             delete_parenthesis();
@@ -182,22 +184,20 @@ int main() {
                 for (auto i: answer) {
                     file1 << i;
                 }
-                cout << "处理后内容已写入\"ANSWER-DCEE."
-                        "txt\"文件"
-                        << endl;
-                cout << "路径为：" << filesystem::current_path() << endl;
+                printf("处理后内容已写入\"ANSWER-DCEE.txt\"文件\n");
+                printf("目录为：%s\n", CurrentPathString.c_str());
                 file1.close();
                 system("pause");
             } else {
-                cerr << "ERROR:创建输出文件失败" << endl;
+                fprintf(stderr, "ERROR:创建输出文件失败\n");
                 system("pause");
             }
         } else {
-            cerr << "ERROR:读取文件失败" << endl;
+            fprintf(stderr, "ERROR:读取文件失败\n");
             system("pause");
         }
     } else {
-        cerr << "ERROR:输入内容不合法" << endl;
+        fprintf(stderr, "ERROR:输入内容不合法\n");
         system("pause");
     }
     return 0;
