@@ -135,10 +135,10 @@ int main() {
     cout << "需要生成全新txt文件(0)还是处理现有txt文件(1)：" << endl;
     cin >> choose;
     if (choose == 0) {
-        fstream file("Delete-characters-except-English.txt", ios::out);
+        fstream file("DCEE.txt", ios::out);
         if (file.is_open()) {
             file.close();
-            cout << "已生成全新\"Delete-characters-except-English.txt\"文件" << endl;
+            cout << "已生成全新\"DCEE.txt\"文件" << endl;
             cout << "路径为：" << filesystem::current_path() << endl;
             system("pause");
         } else {
@@ -146,7 +146,7 @@ int main() {
             system("pause");
         }
     } else if (choose == 1) {
-        fstream file("Delete-characters-except-English.txt", ios::in);
+        fstream file("DCEE.txt", ios::in);
         if (file.is_open()) {
             // 输入文件内容
             while (true) {
@@ -177,12 +177,12 @@ int main() {
                 answer.push_back(i);
             }
             // 写入新文件
-            fstream file1("ANSWER-Delete-characters-except-English.txt", ios::out);
+            fstream file1("ANSWER-DCEE.txt", ios::out);
             if (file1.is_open()) {
                 for (auto i: answer) {
                     file1 << i;
                 }
-                cout << "处理后内容已写入\"ANSWER-Delete-characters-except-English."
+                cout << "处理后内容已写入\"ANSWER-DCEE."
                         "txt\"文件"
                         << endl;
                 cout << "路径为：" << filesystem::current_path() << endl;
