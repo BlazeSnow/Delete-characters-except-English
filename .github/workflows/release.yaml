@@ -1,4 +1,4 @@
-name: Build and Release Executables
+name: Build and Release Windows Executable
 
 on:
   workflow_dispatch:
@@ -12,8 +12,9 @@ permissions:
   contents: write
 
 jobs:
-  build-windows:
+  build:
     runs-on: windows-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,71 +23,24 @@ jobs:
         run: choco install llvm -y
 
       - name: Compile with Clang
-        run: clang.exe -O2 -DNDEBUG -static -std=c++23 main.cpp -o DCEE-win.exe
+        run: clang.exe -O2 -DNDEBUG -static -std=c++23 main.cpp -o DCEE.exe
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: DCEE-windows
-          path: ./DCEE-windows.exe
-
-  build-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Build Tools
-        run: sudo apt-get update && sudo apt-get install -y clang
-
-      - name: Compile with Clang
-        run: clang++ -O2 -DNDEBUG -static -std=c++23 main.cpp -o DCEE-linux
-
-      - name: Upload Linux Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: DCEE-linux
-          path: ./DCEE-linux
-
-  build-macos:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Compile with Clang
-        run: clang++ -O2 -DNDEBUG -std=c++23 main.cpp -o DCEE-macos
-
-      - name: Upload macOS Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: DCEE-macos
-          path: ./DCEE-macos
+          name: DCEE
+          path: ./DCEE.exe
 
   release:
-    needs:
-      - build-windows
-      - build-linux
-      - build-macos
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download Windows Artifact
+      - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
-          name: DCEE-windows
+          name: DCEE
 
-      - name: Download Linux Artifact
-        uses: actions/download-artifact@v4
+      - uses: ncipollo/release-action@v1
         with:
-          name: DCEE-linux
-
-      - name: Download macOS Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: DCEE-macos
-
-      - name: Create Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "DCEE-windows.exe,DCEE-linux,DCEE-macos"
+          artifacts: "DCEE.exe"
           tag: ${{ inputs.tag }}
