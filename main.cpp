@@ -129,7 +129,7 @@ int main() {
     system("chcp 65001");
     system("cls");
     printf("Copyright (C) 2024-2025 BlazeSnow. 保留所有权利。\n");
-    printf("当前程序版本号：v1.3.8\n");
+    printf("当前程序版本号：v1.3.9\n");
     printf("https://github.com/BlazeSnow/Delete-characters-except-English\n\n");
     vector<char> answer;
     int choose;
