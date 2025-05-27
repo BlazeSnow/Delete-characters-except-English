@@ -24,6 +24,13 @@
 | 27 |    Collective Noun    |  coll. n.   | 28 |     Abstract Noun     |  abs. n.   |
 | 29 |     Concrete Noun     |  conc. n.   |    |                       |            |
 
+## v1.3.9
+
+2025年5月27日22点20分
+
+- 优化程序输出内容
+- 优化程序名称及文件名称
+
 ## v1.3.8
 
 2025年2月17日13点31分
