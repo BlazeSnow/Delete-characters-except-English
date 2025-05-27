@@ -142,7 +142,7 @@ int main() {
             cout << "路径为：" << filesystem::current_path() << endl;
             system("pause");
         } else {
-            cout << "ERROR:生成文件失败" << endl;
+            cerr << "ERROR:生成文件失败" << endl;
             system("pause");
         }
     } else if (choose == 1) {
@@ -189,15 +189,15 @@ int main() {
                 file1.close();
                 system("pause");
             } else {
-                cout << "ERROR:创建输出文件失败" << endl;
+                cerr << "ERROR:创建输出文件失败" << endl;
                 system("pause");
             }
         } else {
-            cout << "ERROR:读取文件失败" << endl;
+            cerr << "ERROR:读取文件失败" << endl;
             system("pause");
         }
     } else {
-        cout << "ERROR:输入内容不合法" << endl;
+        cerr << "ERROR:输入内容不合法" << endl;
         system("pause");
     }
     return 0;
