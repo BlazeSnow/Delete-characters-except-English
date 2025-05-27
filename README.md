@@ -6,23 +6,23 @@
 4. 程序将删除英文括号及括号内内容
 5. 程序将删除表示单词类型的缩写
 
-|       |         Full          |    Short    |       |         Full          |   Short    |
-| :---: | :-------------------: | :---------: | :---: | :-------------------: | :--------: |
-|   1   |         Noun          |     n.      |   2   |        Pronoun        |   pron.    |
-|   3   |        Article        |    art.     |   4   |        Numeral        |    num.    |
-|   5   |       Adjective       |    adj.     |   6   |        Adverb         |    adv.    |
-|   7   |         Verb          |     v.      |   8   |      Conjunction      |   conj.    |
-|   9   |      Preposition      |    prep.    |  10   |     Interjection      |    int.    |
-|  11   |     Abbreviation      |    abbr.    |  12   |    Transitive Verb    |    vt.     |
-|  13   |   Intransitive Verb   |     vi.     |  14   |      Determiner       |    det.    |
-|  15   |      Quantifier       |   quant.    |  16   |    Auxiliary Verb     |    aux.    |
-|  17   |      Modal Verb       |   modal.    |  18   |        Gerund         |    ger.    |
-|  19   |      Infinitive       |    inf.     |  20   |      Participle       |   part.    |
-|  21   |   Reflexive Pronoun   | refl. pron. |  22   | Demonstrative Pronoun | dem. pron. |
-|  23   |  Possessive Pronoun   | poss. pron. |  24   |   Relative Pronoun    | rel. pron. |
-|  25   | Interrogative Pronoun | int. pron.  |  26   |      Proper Noun      |  prop. n.  |
-|  27   |    Collective Noun    |  coll. n.   |  28   |     Abstract Noun     |  abs. n.   |
-|  29   |     Concrete Noun     |  conc. n.   |       |                       |            |
+|    |         Full          |    Short    |    |         Full          |   Short    |
+|:--:|:---------------------:|:-----------:|:--:|:---------------------:|:----------:|
+| 1  |         Noun          |     n.      | 2  |        Pronoun        |   pron.    |
+| 3  |        Article        |    art.     | 4  |        Numeral        |    num.    |
+| 5  |       Adjective       |    adj.     | 6  |        Adverb         |    adv.    |
+| 7  |         Verb          |     v.      | 8  |      Conjunction      |   conj.    |
+| 9  |      Preposition      |    prep.    | 10 |     Interjection      |    int.    |
+| 11 |     Abbreviation      |    abbr.    | 12 |    Transitive Verb    |    vt.     |
+| 13 |   Intransitive Verb   |     vi.     | 14 |      Determiner       |    det.    |
+| 15 |      Quantifier       |   quant.    | 16 |    Auxiliary Verb     |    aux.    |
+| 17 |      Modal Verb       |   modal.    | 18 |        Gerund         |    ger.    |
+| 19 |      Infinitive       |    inf.     | 20 |      Participle       |   part.    |
+| 21 |   Reflexive Pronoun   | refl. pron. | 22 | Demonstrative Pronoun | dem. pron. |
+| 23 |  Possessive Pronoun   | poss. pron. | 24 |   Relative Pronoun    | rel. pron. |
+| 25 | Interrogative Pronoun | int. pron.  | 26 |      Proper Noun      |  prop. n.  |
+| 27 |    Collective Noun    |  coll. n.   | 28 |     Abstract Noun     |  abs. n.   |
+| 29 |     Concrete Noun     |  conc. n.   |    |                       |            |
 
 ## v1.3.8
 
@@ -74,8 +74,8 @@
 2024年7月19日17点08分
 
 - 程序现在将清空空行
-  - 先清空双倍空格
-  - 然后删除双倍回车的其中一个
+    - 先清空双倍空格
+    - 然后删除双倍回车的其中一个
 
 ## v1.3.0
 
