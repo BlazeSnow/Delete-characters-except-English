@@ -8,7 +8,7 @@ using namespace std;
 const filesystem::path CurrentPath = filesystem::current_path();
 const string CurrentPathString = CurrentPath.string();
 
-const vector<vector<char>> words_delete = {
+const vector<vector<char> > words_delete = {
     // 英语单词类型常用缩写
     {'n', '.'},
     {'p', 'r', 'o', 'n', '.'},
@@ -45,9 +45,9 @@ static vector<char> characters;
 void compare_extra_words() {
     for (auto i = characters.begin(); i != characters.end(); i++) {
         int count = 0;
-        for (const auto &words : words_delete) {
+        for (const auto &words: words_delete) {
             auto it = i;
-            for (auto j : words) {
+            for (auto j: words) {
                 if (*it == j) {
                     ++it;
                     ++count;
@@ -174,13 +174,13 @@ int main() {
             delete_blank();
             delete_blank_n();
             // 写入answer
-            for (const auto &i : characters) {
+            for (const auto &i: characters) {
                 answer.push_back(i);
             }
             // 写入新文件
             fstream file1("ANSWER-DCEE.txt", ios::out);
             if (file1.is_open()) {
-                for (auto i : answer) {
+                for (auto i: answer) {
                     file1 << i;
                 }
                 printf("处理后内容已写入\"ANSWER-DCEE.txt\"文件\n");
