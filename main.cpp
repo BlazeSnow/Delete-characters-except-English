@@ -3,7 +3,26 @@
 #include <fstream>
 #include <vector>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 using namespace std;
+
+void clearConsole() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+void enterToContinue() {
+    printf("按回车键继续...");
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
+}
 
 const filesystem::path CurrentPath = filesystem::current_path();
 const string CurrentPathString = CurrentPath.string();
@@ -126,8 +145,12 @@ void delete_blank_n() {
 }
 
 int main() {
-    system("chcp 65001");
-    system("cls");
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+#endif
+
+    clearConsole();
     printf("Copyright (C) 2024-2026 BlazeSnow. 保留所有权利。\n");
     printf("当前程序版本号：v1.3.10\n");
     printf("https://github.com/BlazeSnow/CppWorkspace\n\n");
@@ -141,11 +164,11 @@ int main() {
             file.close();
             printf("已生成全新\"DCEE.txt\"文件\n");
             printf("目录为：%s\n", CurrentPathString.c_str());
-            system("pause");
+            enterToContinue();
         } else {
             fprintf(stderr, "错误：\"DCEE.txt\"文件生成失败，请重试\n");
             fprintf(stderr, "目录为：%s\n", CurrentPathString.c_str());
-            system("pause");
+            enterToContinue();
         }
     } else if (choose == 1) {
         fstream file("DCEE.txt", ios::in);
@@ -186,18 +209,18 @@ int main() {
                 printf("处理后内容已写入\"ANSWER-DCEE.txt\"文件\n");
                 printf("目录为：%s\n", CurrentPathString.c_str());
                 file1.close();
-                system("pause");
+                enterToContinue();
             } else {
                 fprintf(stderr, "ERROR:创建输出文件失败\n");
-                system("pause");
+                enterToContinue();
             }
         } else {
             fprintf(stderr, "ERROR:读取文件失败\n");
-            system("pause");
+            enterToContinue();
         }
     } else {
         fprintf(stderr, "ERROR:输入内容不合法\n");
-        system("pause");
+        enterToContinue();
     }
     return 0;
 }
