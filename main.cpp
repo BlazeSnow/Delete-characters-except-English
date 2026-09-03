@@ -152,9 +152,8 @@ int main() {
 #endif
 
     clearConsole();
-    printf("Copyright (C) 2024-2026 BlazeSnow. 保留所有权利。\n");
-    printf("当前程序版本号：v1.3.10\n");
-    printf("https://github.com/BlazeSnow/CppWorkspace\n\n");
+    printf("Copyright (C) 2024-2026 BlazeSnow.\n");
+    printf("https://github.com/BlazeSnow/Delete-characters-except-English\n\n");
     vector<char> answer;
     int choose;
     printf("需要生成全新txt文件(0)还是处理现有txt文件(1)：\n");
